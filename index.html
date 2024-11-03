@@ -5,6 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ride Integrator</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 150px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .search-section, .feedback-section {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .suggestions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: white;
+            position: absolute;
+            z-index: 1000;
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        .suggestions-list li {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .suggestions-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,7 +82,23 @@
             <h2>Select your pickup and destination</h2>
             <form action="booking.html" method="GET">
                 <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
-                <input type="text" id="destination" name="destination" placeholder="Enter Destination" required>
+                
+                <label for="state">Select State:</label>
+                <select id="state" onchange="updateLocations()">
+                    <option value="">--Select a State--</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                </select>
+
+                <input type="text" id="destination" name="destination" placeholder="Enter Destination" required autocomplete="off" onkeyup="filterLocations()">
+                <ul id="suggestions" class="suggestions-list"></ul>
+
                 <button type="button" onclick="alert('Using current location feature is not active in this prototype.')">Use My Location</button>
                 <button type="submit">Book Ride</button>
             </form>
@@ -39,6 +119,88 @@
     </footer>
 
     <script>
+        const locationsByState = {
+            "Maharashtra": [
+                "Mumbai - Marine Drive",
+                "Mumbai - Colaba Causeway",
+                "Pune - FC Road",
+                "Nagpur - Sitabuldi",
+                "Nashik - Godavari Ghat"
+            ],
+            "Karnataka": [
+                "Bangalore - MG Road",
+                "Bangalore - Brigade Road",
+                "Mysore - Mysore Palace Road",
+                "Mangalore - Hampankatta",
+                "Hubli - Gokul Road"
+            ],
+            "Delhi": [
+                "New Delhi - Connaught Place",
+                "New Delhi - Chandni Chowk",
+                "Faridabad - Sector 15",
+                "Gurgaon - MG Road"
+            ],
+            "Tamil Nadu": [
+                "Chennai - Marina Beach",
+                "Chennai - T. Nagar",
+                "Coimbatore - RS Puram",
+                "Madurai - Meenakshi Temple Road"
+            ],
+            "Uttar Pradesh": [
+                "Lucknow - Hazratganj",
+                "Kanpur - Mall Road",
+                "Varanasi - Dashashwamedh Ghat",
+                "Agra - Fatehpur Sikri Road"
+            ],
+            "Gujarat": [
+                "Ahmedabad - SG Highway",
+                "Surat - Palanpur",
+                "Vadodara - Sayajigunj",
+                "Rajkot - Kalavad Road"
+            ],
+            "West Bengal": [
+                "Kolkata - Park Street",
+                "Siliguri - Hill Cart Road",
+                "Howrah - Howrah Bridge"
+            ],
+            "Rajasthan": [
+                "Jaipur - MI Road",
+                "Udaipur - Lake Pichola",
+                "Jodhpur - Mehrangarh Fort Road",
+                "Ajmer - Ajmer Road"
+            ]
+        };
+
+        let selectedState = '';
+
+        function updateLocations() {
+            selectedState = document.getElementById("state").value;
+            document.getElementById("destination").value = '';
+            document.getElementById("suggestions").innerHTML = '';
+        }
+
+        function filterLocations() {
+            const input = document.getElementById("destination").value;
+            const suggestionsList = document.getElementById("suggestions");
+            suggestionsList.innerHTML = "";
+
+            if (selectedState && input) {
+                const filteredLocations = locationsByState[selectedState].filter(location => 
+                    location.toLowerCase().startsWith(input.toLowerCase())
+                );
+                
+                filteredLocations.forEach(location => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = location;
+                    listItem.onclick = () => {
+                        document.getElementById("destination").value = location;
+                        suggestionsList.innerHTML = ""; // Clear suggestions
+                    };
+                    suggestionsList.appendChild(listItem);
+                });
+            }
+        }
+
         // Handle feedback form submission
         document.getElementById('feedbackForm').addEventListener('submit', function(event) {
             event.preventDefault();
