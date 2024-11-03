@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ride Integrator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
     <header>
@@ -20,19 +19,37 @@
             <form action="booking.html" method="GET">
                 <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
                 <input type="text" id="destination" name="destination" placeholder="Enter Destination" required>
-                <button type="button" onclick="useMyLocation()">Use My Location</button>
+                <button type="button" onclick="alert('Using current location feature is not active in this prototype.')">Use My Location</button>
                 <button type="submit">Book Ride</button>
             </form>
         </div>
 
-        <!-- Map Section -->
-        <div id="map"></div>
+        <!-- Placeholder Map Section -->
+        <div class="map-placeholder">
+            <img src="https://via.placeholder.com/600x400?text=Map+Placeholder" alt="Map Placeholder" />
+        </div>
+
+        <!-- Customer Feedback Section -->
+        <div class="feedback-section">
+            <h2>Customer Feedback</h2>
+            <form id="feedbackForm">
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your feedback here..." required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Ride Integrator | <a href="#">Contact Us</a></p>
     </footer>
 
-    <script src="map.js"></script>
+    <script>
+        // Handle feedback form submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your feedback!');
+            document.getElementById('feedback').value = ''; // Clear the feedback textarea
+        });
+    </script>
 </body>
 </html>
