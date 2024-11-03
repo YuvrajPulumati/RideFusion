@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #e0f7fa;
+    background-color: #e0f7fa; /* Light Blue Background */
     color: #333;
     margin: 0;
     padding: 0;
@@ -27,7 +27,7 @@ main {
     padding: 2rem;
 }
 
-.search-section {
+.search-section, .feedback-section {
     max-width: 600px;
     margin: auto;
     padding: 1.5rem;
@@ -59,11 +59,26 @@ button:hover {
     background-color: #0277BD;
 }
 
-#map {
-    height: 400px;
-    width: 100%;
+.map-placeholder {
     max-width: 600px;
     margin: 2rem auto;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-placeholder img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.feedback-section h2 {
+    margin-top: 1rem;
+}
+
+.feedback-section textarea {
+    resize: none;
+}
+
+.feedback-section button {
+    margin-top: 0.5rem;
 }
