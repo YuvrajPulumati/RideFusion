@@ -27,7 +27,7 @@ main {
     padding: 2rem;
 }
 
-.search-section, .feedback-section, .status {
+.search-section {
     max-width: 600px;
     margin: auto;
     padding: 1.5rem;
@@ -59,25 +59,11 @@ button:hover {
     background-color: #0277BD;
 }
 
-.feedback-section textarea {
-    resize: vertical;
-}
-
-.footer {
-    margin-top: 3rem;
-    color: #777;
-}
-
-.button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background-color: #0288D1;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.button:hover {
-    background-color: #0277BD;
+#map {
+    height: 400px;
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
