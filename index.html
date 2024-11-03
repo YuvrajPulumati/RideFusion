@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ride Integrator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body>
     <header>
@@ -15,26 +16,23 @@
 
     <main>
         <div class="search-section">
-            <h2>Enter your location to book the best ride</h2>
+            <h2>Select your location on the map or enter details</h2>
             <form action="booking.html" method="GET">
-                <input type="text" name="pickup" placeholder="Enter Pickup Location" required>
-                <input type="text" name="destination" placeholder="Enter Destination" required>
+                <input type="text" id="pickup" name="pickup" placeholder="Pickup Location" required>
+                <input type="text" id="destination" name="destination" placeholder="Enter Destination" required>
+                <button type="button" onclick="useMyLocation()">Use My Location</button>
                 <button type="submit">Book Ride</button>
             </form>
         </div>
-        
-        <!-- Customer Feedback Section -->
-        <div class="feedback-section">
-            <h3>Customer Feedback</h3>
-            <form action="feedback.html" method="GET">
-                <textarea name="feedback" rows="4" placeholder="Share your experience..."></textarea>
-                <button type="submit">Submit Feedback</button>
-            </form>
-        </div>
+
+        <!-- Map Section -->
+        <div id="map"></div>
     </main>
 
     <footer>
         <p>&copy; 2024 Ride Integrator | <a href="#">Contact Us</a></p>
     </footer>
+
+    <script src="map.js"></script>
 </body>
 </html>
