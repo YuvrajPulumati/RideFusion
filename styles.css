@@ -1,23 +1,27 @@
+/* Set a background color for the whole page */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f9;
+    background-color: #e0f7fa; /* Light cyan background */
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 header {
     background-color: #4CAF50;
     color: white;
     padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 }
 
+/* Style the logo for a small size and position it in the top-right corner */
 .logo {
-    width: 80px; /* Adjust size as needed */
+    width: 50px; /* Smaller size */
     height: auto;
-    margin-right: 15px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 main {
